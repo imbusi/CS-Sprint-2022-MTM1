@@ -12,7 +12,7 @@ motions = os.listdir(videos_path)
 
 print('The motions are:', motions)
 
-#Walk through each motions videos
+#Walk through each motion's videos
 for motion in motions:
     motion_path = os.path.join(videos_path, motion)
     out_motion_path = os.path.join(images_path, motion)
@@ -24,6 +24,7 @@ for motion in motions:
         vidcap = cv2.VideoCapture(video_path)
         success,image = vidcap.read()
         count = 1
+        #Write Each frame to a jpg
         while success:
             out_name = video[:-4] + '_{}.jpg'.format(count)
             out_frame_path = os.path.join(out_motion_path, out_name)
