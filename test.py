@@ -7,7 +7,7 @@ import sys
 body_classifier = cv2.CascadeClassifier('Haarcascades\haarcascade_fullbody.xml')
 
 # Initiate video capture for video file
-cap = cv2.VideoCapture('image_examples/short.avi')
+cap = cv2.VideoCapture('image_examples/short2.avi')
 height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
 width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
 # Loop once video is successfully loaded
