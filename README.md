@@ -1,6 +1,12 @@
-# MTM study: OpenCV/ML team
 
-We made use of OpenCV and Machine Learning to accuractely identify what motion is being performed in a video
+
+
+
+# CS-Sprint-2022-MTM1 - OpenCV/ML Implementation
+We made use of OpenCV and Machine Learning to accuractely identify what motion is being performed in a video. Towards the goal of accurately identifying the correct MTM code. This project was worked on by Asit Singh and Vyas Padmanabhan.
+
+**This project was performed as part of CS 499 and Mercedes-Benz U.S. International (MBUSI) was the collaborator.**
+
 
 ## How to Arrange Videos in the Video folder (same applies for TestVideos)
 Videos/  
