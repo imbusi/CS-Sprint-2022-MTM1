@@ -1,13 +1,12 @@
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 from MobileNetV2 import MobileNet as MN
-from MobileNetV2 import CreateMobileNet as CMN
 
 ROOT_DIR = os.getcwd()
 
 training_path = os.path.join(ROOT_DIR, 'Images')
 vs = 0.2
-epochs = 5
+epochs = 1
 
 labelDictionary = dict()
 class_names = os.listdir(training_path)
