@@ -19,8 +19,10 @@ def CreateMobileNet(label_dictionary):
 
     model = tf.keras.Sequential([
       feature_extractor_layer,
-      tf.keras.layers.Dense(num_classes)
+      tf.keras.layers.Dense(num_classes, activation='sigmoid'),
+      tf.keras.layers.Softmax()
     ])
+
     return model
 
 def MobileNet(training_path, vs, training_epochs, label_dictionary):
@@ -76,7 +78,8 @@ def MobileNet(training_path, vs, training_epochs, label_dictionary):
 
     model = tf.keras.Sequential([
       feature_extractor_layer,
-      tf.keras.layers.Dense(num_classes)
+      tf.keras.layers.Dense(num_classes, activation='sigmoid'),
+      tf.keras.layers.Softmax()
     ])
 
     model.compile(
