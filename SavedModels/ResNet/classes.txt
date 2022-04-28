@@ -1,3 +1,3 @@
-Side_Step Turn_Body Walk 
+Bend Eye_Travel Leg_Motion Pick_Place Side_Step Sit Stoop Turn_Body 
 ResNet
 5
