@@ -3,10 +3,19 @@
 
 
 # CS-Sprint-2022-MTM1 - OpenCV/ML Implementation
-We made use of OpenCV and Machine Learning to accuractely identify what motion is being performed in a video. Towards the goal of accurately identifying the correct MTM code. This project was worked on by Asit Singh and Vyas Padmanabhan.
+We made use of OpenCV and Machine Learning to accurately identify what motion is being performed in a video. Towards the goal of accurately identifying the correct MTM code. This project was worked on by Asit Singh and Vyas Padmanabhan.
 
 **This project was performed as part of CS 499 and Mercedes-Benz U.S. International (MBUSI) was the collaborator.**
 
+
+## Dependencies that must be installed
+<ol>
+  <li>Python</li>
+  <li>TensorFlow</li>
+  <li>TensorFlow Hub</li>
+  <li>OpenCV</li>
+  <li>NumPy</li>
+</ol>
 
 ## How to Arrange Videos in the Video folder (same applies for TestVideos)
 Videos/  
