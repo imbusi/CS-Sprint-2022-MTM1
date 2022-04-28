@@ -59,13 +59,22 @@ def MobileNet(training_path, vs, training_epochs, label_dictionary):
       image_size=(img_height, img_width),
       batch_size=batch_size)
 
+    val_ds = tf.keras.preprocessing.image_dataset_from_directory(
+      training_path,
+      validation_split=vs,
+      subset="validation",
+      seed=123,
+      image_size=(img_height, img_width),
+      batch_size=batch_size)
+
 
     class_names = np.array(train_ds.class_names)
     normalization_layer = tf.keras.layers.experimental.preprocessing.Rescaling(1./255)
     train_ds = train_ds.map(lambda x, y: (normalization_layer(x), y))
+    val_ds = val_ds.map(lambda x, y: (normalization_layer(x), y))
     AUTOTUNE = tf.data.AUTOTUNE
     train_ds = train_ds.cache().prefetch(buffer_size=AUTOTUNE)
-
+    val_ds = val_ds.cache().prefetch(buffer_size=AUTOTUNE)
 
     #Change for different model
     feature_extractor_model = "https://tfhub.dev/google/tf2-preview/mobilenet_v2/feature_vector/4"
@@ -81,6 +90,8 @@ def MobileNet(training_path, vs, training_epochs, label_dictionary):
       tf.keras.layers.Dense(num_classes, activation='sigmoid'),
       tf.keras.layers.Softmax()
     ])
+
+    print(model.summary())
 
     model.compile(
       optimizer=tf.keras.optimizers.Adam(),
@@ -98,7 +109,7 @@ def MobileNet(training_path, vs, training_epochs, label_dictionary):
         self.model.reset_metrics()
 
     batch_stats_callback = CollectBatchStats()
-    history = model.fit(train_ds, epochs=training_epochs,
+    history = model.fit(train_ds, validation_data=val_ds, epochs=training_epochs,
                         callbacks=[batch_stats_callback])
 
     return model
