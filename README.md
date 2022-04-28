@@ -30,3 +30,9 @@ Videos/
   <li>Put your Videos into the correct folder (TestVideos)</li>
   <li>Run Tests using python RunTests.py</li>
 </ol>
+
+## To Generate a Demo  
+<ol>
+  <li>Write to an mp4 file by using CreateDemos.py</li>
+</ol>
+
