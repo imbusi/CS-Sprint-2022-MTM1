@@ -28,5 +28,5 @@ Videos/
 ## To Test the classifier
 <ol>
   <li>Put your Videos into the correct folder (TestVideos)</li>
-  <li>Run Tests using python TestVideos.py</li>
+  <li>Run Tests using python RunTests.py</li>
 </ol>
