@@ -13,6 +13,13 @@ from time import time
 
 ROOT_DIR = os.getcwd()
 
+
+f = open("log.txt")
+
+
+
+
+
 labelDictionary = dict()
 model = input('Enter what model you want to use (MobileNet, ResNet): ')
 if model == 'MobileNet':
@@ -23,21 +30,36 @@ else:
     print('Wrong input.')
     sys.exit()
 
-f = open(os.path.join(Savename, 'classes.txt'))
-lines = f.readlines()
+classf = open(os.path.join(Savename, 'classes.txt'))
+lines = classf.readlines()
 class_names = lines[0].split()
 for i in range(len(class_names)):
     labelDictionary[i] = class_names[i]
 
 print('Here is your class Dictionary:', labelDictionary)
 print()
-f.close()
+classf.close()
 
 class_counts = dict()
 
 num_classes = len(class_names)
-threshold = 1/float(num_classes)
-print("Threshold: {:.2f}%".format(threshold*100))
+
+use_thresh = input('Use Threshold (Yes or No): ')
+
+if use_thresh == 'Yes':
+    use_thresh = True
+    threshold = 1/float(num_classes)
+    print("Threshold: {:.2f}%".format(threshold*100))
+elif use_thresh == 'No':
+    use_thresh = False
+    threshold = 0
+else:
+    print('Wrong input.')
+    sys.exit()
+
+f.write("Model: {}, threshold = {:.2f}\n\n".format(model, threshold))
+
+
 
 saved_h5 = os.path.join(Savename, 'model.h5')
 
@@ -59,7 +81,6 @@ total_correct = 0
 total_checked = 0
 motions = os.listdir(test_path)
 
-motions = motions[1:2]
 
 for motion in motions:
     motion_path = os.path.join(test_path, motion)
@@ -67,8 +88,14 @@ for motion in motions:
 
     motion_correct = 0
     motion_checked = 0
+    #Skip Untrained motions
+    if motion not in class_names:
+        continue
     print('Motion:', motion, '.', len(videos), 'videos.')
     print()
+
+    f.write("\nMotion: {}. {} videos.\n".format(motion, len(videos)))
+
     #For each video in class
     for video in videos:
         for cls in class_names:
@@ -103,11 +130,6 @@ for motion in motions:
                 predicted_id = np.argmax(image_probs, axis=-1)
                 test_label = class_names[predicted_id[0]]
 
-            #add label to dictionary
-            #class_counts[test_label] = class_counts[test_label] + 1
-            #Add probabilities to dictionary
-
-
                 for cls in class_names:
                     if image_probs[0][class_names.index(cls)] > threshold:
                         class_counts[cls] = class_counts[cls] + image_probs[0][class_names.index(cls)]
@@ -126,7 +148,7 @@ for motion in motions:
         prob_denominator = 0
         for key, value in class_counts.items():
             prob_denominator = prob_denominator + value
-        
+
         for key, value in class_counts.items():
             class_counts[key] = "{:.2f}%".format(value*100.0/prob_denominator)
         print(class_counts)
@@ -142,6 +164,7 @@ for motion in motions:
     else:
         motion_percent = float(motion_correct)/float(motion_checked) * 100.0
     print('\n{} Accuracy : {}/{} = {:.3f}%\n'.format(motion, motion_correct, motion_checked, motion_percent))
+    f.write('{} Accuracy : {}/{} = {:.3f}%\n\n'.format(motion, motion_correct, motion_checked, motion_percent))
 
     total_correct = total_correct + motion_correct
     total_checked = total_checked + motion_checked
@@ -151,7 +174,8 @@ if total_checked == 0:
 else:
     total_percent = float(total_correct)/float(total_checked) * 100.0
 print('\n\nOverall Accuracy : {}/{} = {:.3f}%'.format(total_correct, total_checked, total_percent))
-
+f.write('\n\nOverall Accuracy : {}/{} = {:.3f}%\n'.format(total_correct, total_checked, total_percent))
+f.close()
 end = time()
 print('Total time of execution: {:.3f} seconds. {} frames. fps = {:.3f}'.format(end-start, total_frames, float(total_frames)/(end-start)))
 print('\nDone!')

@@ -1,0 +1,37 @@
+Model: ResNet, threshold = 0.00
+
+
+Motion: Bend. 5 videos.
+Bend Accuracy : 5/5 = 100.000%
+
+
+Motion: Eye_Travel. 2 videos.
+Eye_Travel Accuracy : 2/2 = 100.000%
+
+
+Motion: Leg_Motion. 4 videos.
+Leg_Motion Accuracy : 4/4 = 100.000%
+
+
+Motion: Pick_Place. 4 videos.
+Pick_Place Accuracy : 4/4 = 100.000%
+
+
+Motion: Side_Step. 4 videos.
+Side_Step Accuracy : 4/4 = 100.000%
+
+
+Motion: Sit. 4 videos.
+Sit Accuracy : 4/4 = 100.000%
+
+
+Motion: Stoop. 5 videos.
+Stoop Accuracy : 5/5 = 100.000%
+
+
+Motion: Turn_Body. 2 videos.
+Turn_Body Accuracy : 0/2 = 0.000%
+
+
+
+Overall Accuracy : 28/30 = 93.333%
